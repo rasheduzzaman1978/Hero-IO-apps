@@ -11,7 +11,7 @@ export default function NotFound() {
           src={Error404Image}
           alt="404 Illustration"
           fill
-          className="object-contain"
+          className="object-contain h-10 w-auto"
           priority
         />
       </div>
