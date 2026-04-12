@@ -22,15 +22,14 @@ export default function Navbar() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-  <div className="relative h-8 w-8">
-    <Image
-      src={logoImg}
-      alt="Hero.io Logo"
-      fill
-      className="object-contain"
-      priority
-    />
-  </div>
+  <Image
+  src={logoImg}
+  alt="Hero.io Logo"
+  width={32}
+  height={32}
+  className="object-contain"
+  priority
+/>
 
   <span className="text-lg font-bold tracking-wide text-violet-600">
     HERO.IO
