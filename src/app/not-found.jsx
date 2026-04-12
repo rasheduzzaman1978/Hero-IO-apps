@@ -5,14 +5,15 @@ import Error404Image from '@/assets/images/error-404.png'
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-50 md:min-h-75 flex-col items-center justify-center bg-[#f5f5f7] px-6 text-center">
-      <div className="relative mb-8 h-55 w-55 sm:h-60 sm:w-60 md:h-65 md:w-65">
+    <div className="flex min-h-[50vh] md:min-h-[75vh] flex-col items-center justify-center bg-[#f5f5f7] px-6 text-center">
+      <div className="relative mb-8 h-56 w-56 sm:h-64 sm:w-64 md:h-80 md:w-80">
         <Image
           src={Error404Image}
           alt="404 Illustration"
           fill
-          className="object-contain h-10 w-auto"
           priority
+          sizes="(max-width: 640px) 224px, (max-width: 768px) 256px, 320px"
+          className="object-contain"
         />
       </div>
 
