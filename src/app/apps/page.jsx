@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { FaDownload, FaStar } from 'react-icons/fa'
 
 import SearchInput from './SearchInput'
@@ -49,10 +50,12 @@ export default async function AppsPage({ searchParams }) {
         {/* Apps Grid */}
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {apps.map((app) => (
-            <div
+            <Link
               key={app.id}
+              href={`/apps/${app.id}`}
               className="rounded-md bg-white p-2 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-md"
             >
+              {/* Image */}
               <div className="flex items-center justify-center overflow-hidden rounded bg-gray-200">
                 <Image
                   src={app.image}
@@ -63,10 +66,12 @@ export default async function AppsPage({ searchParams }) {
                 />
               </div>
 
+              {/* Title */}
               <h3 className="mt-3 line-clamp-2 text-sm font-medium text-slate-800">
                 {app.title}
               </h3>
 
+              {/* Bottom Info */}
               <div className="mt-3 flex items-center justify-between">
                 <div className="flex items-center gap-1 rounded-sm bg-green-50 px-2 py-1 text-[11px] font-medium text-green-600">
                   <FaDownload className="text-[9px]" />
@@ -78,7 +83,7 @@ export default async function AppsPage({ searchParams }) {
                   {app.ratingAvg}
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
@@ -91,4 +96,3 @@ export default async function AppsPage({ searchParams }) {
     </section>
   )
 }
-

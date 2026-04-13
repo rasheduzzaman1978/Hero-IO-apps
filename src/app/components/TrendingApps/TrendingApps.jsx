@@ -35,8 +35,9 @@ export default async function TrendingAppsSection() {
         {/* Apps Grid */}
         <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {apps.map((app) => (
-            <div
+            <Link
               key={app.id}
+              href={`/apps/${app.id}`}
               className="rounded-md bg-white p-2 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-md"
             >
               {/* App Image */}
@@ -67,7 +68,7 @@ export default async function TrendingAppsSection() {
                   {app.ratingAvg}
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
