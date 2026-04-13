@@ -2,17 +2,22 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { FaDownload, FaStar } from 'react-icons/fa'
 import { MdReviews } from 'react-icons/md'
+import appsData from '../../../../public/data.json'
+
+// async function getApps() {
+//   const response = await fetch('/data.json', {
+//     cache: 'no-store',
+//   })
+
+//   if (!response.ok) {
+//     throw new Error('Failed to fetch apps')
+//   }
+
+//   return response.json()
+// }
 
 async function getApps() {
-  const response = await fetch('http://localhost:3000/data.json', {
-    cache: 'no-store',
-  })
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch apps')
-  }
-
-  return response.json()
+  return appsData
 }
 
 export default async function AppDetailsPage({ params }) {

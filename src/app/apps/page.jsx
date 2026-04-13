@@ -3,19 +3,26 @@ import Link from 'next/link'
 import { FaDownload, FaStar } from 'react-icons/fa'
 
 import SearchInput from './SearchInput'
+import appsData from '../../../public/data.json';
+
+// async function getApps(search = '') {
+//   const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/data.json`, {
+//     cache: 'no-store',
+//   })
+
+//   if (!response.ok) {
+//     throw new Error('Failed to fetch apps')
+//   }
+
+//   const apps = await response.json()
+
+//   return apps.filter((app) =>
+//     app.title.toLowerCase().includes(search.toLowerCase())
+//   )
+// }
 
 async function getApps(search = '') {
-  const response = await fetch('http://localhost:3000/data.json', {
-    cache: 'no-store',
-  })
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch apps')
-  }
-
-  const apps = await response.json()
-
-  return apps.filter((app) =>
+  return appsData.filter((app) =>
     app.title.toLowerCase().includes(search.toLowerCase())
   )
 }

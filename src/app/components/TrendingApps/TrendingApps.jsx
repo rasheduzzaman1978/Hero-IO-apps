@@ -1,19 +1,24 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { FaDownload, FaStar } from 'react-icons/fa'
+import { FaDownload, FaStar } from 'react-icons/fa';
+import appsData from '../../../../public/data.json';
 
 async function getApps() {
-  const response = await fetch('http://localhost:3000/data.json', {
-    cache: 'no-store',
-  })
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch apps')
-  }
-
-  const data = await response.json()
-  return data.slice(0, 8)
+  return appsData.slice(0, 8)
 }
+
+// async function getApps() {
+//   const response = await fetch('/data.json', {
+//     cache: 'no-store',
+//   })
+
+//   if (!response.ok) {
+//     throw new Error('Failed to fetch apps')
+//   }
+
+//   const data = await response.json()
+//   return data.slice(0, 8)
+// }
 
 export default async function TrendingAppsSection() {
   const apps = await getApps()
