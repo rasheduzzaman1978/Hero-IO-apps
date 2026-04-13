@@ -1,7 +1,9 @@
 import Image from 'next/image'
-import { FaDownload, FaSearch, FaStar } from 'react-icons/fa'
+import { FaDownload, FaStar } from 'react-icons/fa'
 
-async function getApps() {
+import SearchInput from './SearchInput'
+
+async function getApps(search = '') {
   const response = await fetch('http://localhost:3000/data.json', {
     cache: 'no-store',
   })
@@ -10,11 +12,16 @@ async function getApps() {
     throw new Error('Failed to fetch apps')
   }
 
-  return response.json()
+  const apps = await response.json()
+
+  return apps.filter((app) =>
+    app.title.toLowerCase().includes(search.toLowerCase())
+  )
 }
 
-export default async function AppsPage() {
-  const apps = await getApps()
+export default async function AppsPage({ searchParams }) {
+  const query = searchParams?.search || ''
+  const apps = await getApps(query)
 
   return (
     <section className="bg-[#f5f5f7] px-6 py-14">
@@ -36,15 +43,7 @@ export default async function AppsPage() {
             ({apps.length}) Apps Found
           </h2>
 
-          <div className="relative w-80 sm:w-50">
-            <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-slate-400" />
-
-            <input
-              type="text"
-              placeholder="search Apps"
-              className="w-full rounded border border-slate-200 bg-white py-2 pl-9 pr-4 text-sm outline-none transition focus:border-violet-500"
-            />
-          </div>
+          <SearchInput />
         </div>
 
         {/* Apps Grid */}
@@ -54,23 +53,20 @@ export default async function AppsPage() {
               key={app.id}
               className="rounded-md bg-white p-2 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-md"
             >
-              {/* Image */}
-              <div className="overflow-hidden rounded flex items-center justify-center bg-gray-200">
+              <div className="flex items-center justify-center overflow-hidden rounded bg-gray-200">
                 <Image
                   src={app.image}
                   alt={app.title}
                   width={200}
                   height={200}
-                  className="h-50 w-50 object-cover"
+                  className="h-40 w-40 object-cover md:h-50 md:w-50"
                 />
               </div>
 
-              {/* Title */}
               <h3 className="mt-3 line-clamp-2 text-sm font-medium text-slate-800">
                 {app.title}
               </h3>
 
-              {/* Bottom Info */}
               <div className="mt-3 flex items-center justify-between">
                 <div className="flex items-center gap-1 rounded-sm bg-green-50 px-2 py-1 text-[11px] font-medium text-green-600">
                   <FaDownload className="text-[9px]" />
@@ -85,7 +81,14 @@ export default async function AppsPage() {
             </div>
           ))}
         </div>
+
+        {apps.length === 0 && (
+          <div className="mt-10 text-center text-slate-500">
+            No apps found
+          </div>
+        )}
       </div>
     </section>
   )
 }
+
