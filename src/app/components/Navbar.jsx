@@ -16,7 +16,7 @@ export default function Navbar() {
   const navItems = [
     { label: 'Home', href: '/' },
     { label: 'Apps', href: '/apps' },
-    { label: 'Installation', href: '/InstalledAppCard' },
+    { label: 'Installation', href: '/installation' },
   ]
 
   return (

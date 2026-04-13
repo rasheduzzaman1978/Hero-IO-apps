@@ -5,29 +5,15 @@ import Image from 'next/image'
 import { FaDownload, FaStar } from 'react-icons/fa'
 import toast from 'react-hot-toast'
 
-export default function InstalledAppsList({ app }) {
-  const [installedApps, setInstalledApps] = useState(() => {
-    if (typeof window === 'undefined') return []
-
-    return JSON.parse(localStorage.getItem('installedApps')) || []
-  })
+export default function InstalledAppsList() {
+  const [installedApps, setInstalledApps] = useState([])
 
   useEffect(() => {
     const savedApps =
       JSON.parse(localStorage.getItem('installedApps')) || []
 
-    const alreadyExists = savedApps.find((item) => item.id === app.id)
-
-    if (!alreadyExists) {
-      const updatedApps = [...savedApps, app]
-
-      localStorage.setItem('installedApps', JSON.stringify(updatedApps))
-
-      setTimeout(() => {
-        setInstalledApps(updatedApps)
-      }, 0)
-    }
-  }, [app])
+    setInstalledApps(savedApps)
+  }, [])
 
   const handleUninstall = (id) => {
     const removedApp = installedApps.find((item) => item.id === id)

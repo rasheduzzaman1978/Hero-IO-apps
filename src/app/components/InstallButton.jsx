@@ -1,21 +1,56 @@
 'use client'
 
-import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
 export default function InstallButton({ app }) {
+  const [isInstalled, setIsInstalled] = useState(false)
+
+  useEffect(() => {
+    const savedApps =
+      JSON.parse(localStorage.getItem('installedApps')) || []
+
+    const alreadyInstalled = savedApps.find(
+      (item) => item.id === app.id
+    )
+
+    setIsInstalled(!!alreadyInstalled)
+  }, [app.id])
+
   const handleInstall = () => {
+    const savedApps =
+      JSON.parse(localStorage.getItem('installedApps')) || []
+
+    const alreadyInstalled = savedApps.find(
+      (item) => item.id === app.id
+    )
+
+    if (alreadyInstalled) {
+      toast('Already installed')
+      return
+    }
+
+    const updatedApps = [...savedApps, app]
+
+    localStorage.setItem('installedApps', JSON.stringify(updatedApps))
+
+    setIsInstalled(true)
     toast.success(`${app.title} installed successfully`)
   }
 
   return (
-    <Link
-      href={`/apps/${app.id}/install`}
+    <button
       onClick={handleInstall}
-      className="mt-6 inline-block rounded bg-green-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-green-600"
+      disabled={isInstalled}
+      className={`mt-6 rounded px-5 py-3 text-sm font-medium text-white transition ${
+        isInstalled
+          ? 'cursor-not-allowed bg-slate-300'
+          : 'bg-green-500 hover:bg-green-600'
+      }`}
     >
-      Install Now ({app.size} MB)
-    </Link>
+      {isInstalled
+        ? `Installed (${app.size} MB)`
+        : `Install Now (${app.size} MB)`}
+    </button>
   )
 }
-
