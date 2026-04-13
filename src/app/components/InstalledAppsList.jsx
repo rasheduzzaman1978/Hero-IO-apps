@@ -6,13 +6,21 @@ import { FaDownload, FaStar } from 'react-icons/fa'
 import toast from 'react-hot-toast'
 
 export default function InstalledAppsList() {
-  const [installedApps, setInstalledApps] = useState([])
+  const [installedApps, setInstalledApps] = useState(() => {
+    if (typeof window === 'undefined') return []
+
+    return JSON.parse(localStorage.getItem('installedApps')) || []
+  })
 
   useEffect(() => {
     const savedApps =
       JSON.parse(localStorage.getItem('installedApps')) || []
 
-    setInstalledApps(savedApps)
+    const timer = setTimeout(() => {
+      setInstalledApps(savedApps)
+    }, 0)
+
+    return () => clearTimeout(timer)
   }, [])
 
   const handleUninstall = (id) => {
@@ -89,4 +97,3 @@ export default function InstalledAppsList() {
     </div>
   )
 }
-

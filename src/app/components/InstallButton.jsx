@@ -14,7 +14,11 @@ export default function InstallButton({ app }) {
       (item) => item.id === app.id
     )
 
-    setIsInstalled(!!alreadyInstalled)
+    const timer = setTimeout(() => {
+      setIsInstalled(!!alreadyInstalled)
+    }, 0)
+
+    return () => clearTimeout(timer)
   }, [app.id])
 
   const handleInstall = () => {
