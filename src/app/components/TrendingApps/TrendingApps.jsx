@@ -1,5 +1,6 @@
 import Image from 'next/image'
-import { FaDownload, FaSearch, FaStar } from 'react-icons/fa'
+import Link from 'next/link'
+import { FaDownload, FaStar } from 'react-icons/fa'
 
 async function getApps() {
   const response = await fetch('http://localhost:3000/data.json', {
@@ -10,58 +11,42 @@ async function getApps() {
     throw new Error('Failed to fetch apps')
   }
 
-  return response.json()
+  const data = await response.json()
+  return data.slice(0, 8)
 }
 
-export default async function AppsPage() {
+export default async function TrendingAppsSection() {
   const apps = await getApps()
 
   return (
-    <section className="bg-[#f5f5f7] px-6 py-14">
+    <section className="bg-[#f5f5f7] px-5 py-20">
       <div className="mx-auto max-w-7xl">
         {/* Heading */}
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl">
-            Our All Applications
-          </h1>
+          <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">
+            Trending Apps
+          </h2>
 
           <p className="mt-3 text-sm text-slate-500">
-            Explore All Apps on the Market developed by us. We code for Millions
+            Explore All Trending Apps on the Market developed by us
           </p>
         </div>
 
-        {/* Top Bar */}
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="text-lg font-semibold text-slate-800">
-            ({apps.length}) Apps Found
-          </h2>
-
-          <div className="relative w-80 sm:w-50">
-            <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-slate-400" />
-
-            <input
-              type="text"
-              placeholder="search Apps"
-              className="w-full rounded border border-slate-200 bg-white py-2 pl-9 pr-4 text-sm outline-none transition focus:border-violet-500"
-            />
-          </div>
-        </div>
-
         {/* Apps Grid */}
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {apps.map((app) => (
             <div
               key={app.id}
               className="rounded-md bg-white p-2 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-md"
             >
-              {/* Image */}
-              <div className="overflow-hidden rounded flex items-center justify-center bg-gray-200">
+              {/* App Image */}
+              <div className="overflow-hidden rounded bg-gray-200">
                 <Image
                   src={app.image}
                   alt={app.title}
-                  width={200}
-                  height={200}
-                  className="h-50 w-50 object-cover"
+                  width={300}
+                  height={300}
+                  className="h-44 w-full object-cover"
                 />
               </div>
 
@@ -70,7 +55,7 @@ export default async function AppsPage() {
                 {app.title}
               </h3>
 
-              {/* Bottom Info */}
+              {/* Bottom Stats */}
               <div className="mt-3 flex items-center justify-between">
                 <div className="flex items-center gap-1 rounded-sm bg-green-50 px-2 py-1 text-[11px] font-medium text-green-600">
                   <FaDownload className="text-[9px]" />
@@ -84,6 +69,16 @@ export default async function AppsPage() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Button */}
+        <div className="mt-10 flex justify-center">
+          <Link
+            href="/apps"
+            className="rounded bg-violet-500 px-6 py-2 text-sm font-medium text-white transition hover:bg-violet-600"
+          >
+            Show All
+          </Link>
         </div>
       </div>
     </section>

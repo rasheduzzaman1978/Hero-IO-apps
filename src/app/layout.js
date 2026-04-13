@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer/Footer'
 import HeroSection from './components/Hero/Hero'
 import StatsSection from './components/Stat/Stat'
+import TrendingAppsSection from './components/TrendingApps/TrendingApps'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -46,6 +47,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <HeroSection></HeroSection>
         <StatsSection></StatsSection>
+        <TrendingAppsSection></TrendingAppsSection>
         {children}
         <Footer></Footer>
       </body>
