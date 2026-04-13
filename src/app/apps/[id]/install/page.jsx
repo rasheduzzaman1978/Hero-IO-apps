@@ -1,7 +1,8 @@
 import appsData from '../../../../../public/data.json'
 import InstalledAppsList from './InstalledAppCard'
 
-export default function InstallationPage({ params }) {
+export default async function InstallationPage({ params }) {
+  const {id} = await params
   const app = appsData.find((item) => item.id === Number(params.id))
 
   if (!app) {

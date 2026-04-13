@@ -10,6 +10,7 @@ async function getApps() {
 }
 
 export default async function AppDetailsPage({ params }) {
+  const { id } = await params 
   const apps = await getApps()
 
   const app = apps.find((item) => item.id === Number(params.id))
