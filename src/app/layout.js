@@ -3,6 +3,7 @@ import './globals.css'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer/Footer'
 import HeroSection from './components/Hero/Hero'
+import StatsSection from './components/Stat/Stat'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -44,6 +45,7 @@ export default function RootLayout({ children }) {
       <body className="flex min-h-full flex-col">
         <Navbar />
         <HeroSection></HeroSection>
+        <StatsSection></StatsSection>
         {children}
         <Footer></Footer>
       </body>
