@@ -3,18 +3,7 @@ import { notFound } from 'next/navigation'
 import { FaDownload, FaStar } from 'react-icons/fa'
 import { MdReviews } from 'react-icons/md'
 import appsData from '../../../../public/data.json'
-
-// async function getApps() {
-//   const response = await fetch('/data.json', {
-//     cache: 'no-store',
-//   })
-
-//   if (!response.ok) {
-//     throw new Error('Failed to fetch apps')
-//   }
-
-//   return response.json()
-// }
+import InstallButton from '@/app/components/InstallButton'
 
 async function getApps() {
   return appsData
@@ -96,9 +85,7 @@ export default async function AppDetailsPage({ params }) {
               </div>
             </div>
 
-            <button className="mt-6 rounded bg-green-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-green-600">
-              Install Now ({app.size} MB)
-            </button>
+            <InstallButton app={app} />
           </div>
         </div>
 

@@ -5,6 +5,7 @@ import Footer from './components/Footer/Footer'
 import HeroSection from './components/Hero/Hero'
 import StatsSection from './components/Stat/Stat'
 import TrendingAppsSection from './components/TrendingApps/TrendingApps'
+import { Toaster } from 'react-hot-toast'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -49,6 +50,7 @@ export default function RootLayout({ children }) {
         <StatsSection></StatsSection>
         <TrendingAppsSection></TrendingAppsSection>
         {children}
+         <Toaster position="top-right" />
         <Footer></Footer>
       </body>
     </html>
