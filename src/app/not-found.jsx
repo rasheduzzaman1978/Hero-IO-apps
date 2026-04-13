@@ -5,17 +5,17 @@ import Error404Image from '@/assets/images/error-404.png'
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-[50vh] md:min-h-[75vh] flex-col items-center justify-center bg-[#f5f5f7] px-6 text-center">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[#f5f5f7] px-6 text-center">
       <div className="relative mb-8 h-56 w-56 sm:h-64 sm:w-64 md:h-80 md:w-80">
-        <Image
-          src={Error404Image}
-          alt="404 Illustration"
-          fill
-          priority
-          sizes="(max-width: 640px) 224px, (max-width: 768px) 256px, 320px"
-          className="object-contain"
-        />
-      </div>
+  <Image
+    src={Error404Image}
+    alt="404 Illustration"
+    fill
+    priority
+    sizes="(max-width: 640px) 224px, (max-width: 768px) 256px, 320px"
+    className="object-contain"
+  />
+</div>
 
       <h2 className="mb-2 text-3xl font-bold text-slate-900">
         Oops, page not found!
